@@ -33,6 +33,12 @@ from .execution import ExecutionEngine
 
 from .orchestrator import HyperMomentumScanner, MultiagentOrchestrator
 
+from .telegram import TelegramNotifier
+
+from .paper_trader import PaperTrader
+
+from .scheduler import Scheduler, PositionUpdater
+
 __all__ = [
     # Models
     'SignalStrength',
@@ -61,5 +67,11 @@ __all__ = [
     'RiskManager',
     'ExecutionEngine',
     'HyperMomentumScanner',
-    'MultiagentOrchestrator'
+    'MultiagentOrchestrator',
+    
+    # Telegram & Automation
+    'TelegramNotifier',
+    'PaperTrader',
+    'Scheduler',
+    'PositionUpdater'
 ]
