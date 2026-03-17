@@ -1,5 +1,6 @@
 import hashlib
 import hmac
+import json
 import requests
 import time
 from typing import Dict, Any, Optional
@@ -27,12 +28,14 @@ class DeltaExchangeAPI:
         timestamp = str(int(time.time()))
         query_string = ''
         if params:
-            query_string = '&'.join([f"{k}={v}" for k, v in params.items()])
+            query_string = '&'.join([f"{k}={v}" for k, v in sorted(params.items())])
+        
         payload = ''
         if data:
-            payload = requests.models.PreparedRequest().prepare_body(data, None, None)[0].decode('utf-8') if data else ''
+            payload = json.dumps(data)
 
-        headers = {}
+        headers = self.session.headers.copy()
+        
         if auth:
             signature = self._generate_signature(method, timestamp, path, query_string, payload)
             headers.update({
